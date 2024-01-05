@@ -3,6 +3,6 @@ USE todo_tasks;
 
 CREATE TABLE IF NOT EXISTS tasks (
     Id INT AUTO_INCREMENT PRIMARY KEY,
-    Description VARCHAR NOT NULL,
-    Status BOOLEAN NOT NULL
+    Description VARCHAR(255) NOT NULL,
+    Completed BOOLEAN NOT NULL
 );
