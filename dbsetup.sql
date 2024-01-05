@@ -1,0 +1,8 @@
+CREATE DATABASE IF NOT EXISTS todo_tasks;
+USE todo_tasks;
+
+CREATE TABLE IF NOT EXISTS tasks (
+    Id INT AUTO_INCREMENT PRIMARY KEY,
+    Description VARCHAR NOT NULL,
+    Status BOOLEAN NOT NULL
+);
