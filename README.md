@@ -1,7 +1,7 @@
 # ToDo App Node.js API with Express and MySQL
 
 This repository contains a simple Node.js API for a ToDo App built with Express and MySQL. 
-The API manages tasks with a MySQL database, with table todo_tasks using the following schema:
+The API manages tasks with a MySQL database 'todo_app', with table 'todo_tasks' using the following schema:
 
 ## Database Schema
 
