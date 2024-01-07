@@ -22,8 +22,8 @@ async function createTask(id, task, created) {
 }
 
 async function getAllTasks() {
-    const [comprows] = await pool.query('SELECT * FROM todo_tasks WHERE Completed = 0');
-    const [notcomprows] = await pool.query('SELECT * FROM todo_tasks WHERE Completed = 1');
+    const [comprows] = await pool.query('SELECT * FROM todo_tasks WHERE Completed = 1');
+    const [notcomprows] = await pool.query('SELECT * FROM todo_tasks WHERE Completed = 0');
     rows = { "completed": comprows, "not_completed": notcomprows };
     return rows;
 }
