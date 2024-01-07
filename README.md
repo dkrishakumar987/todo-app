@@ -56,7 +56,9 @@ Before you begin, make sure you have MySQL Server installed on your machine.
 1. Install dependencies:
 
    ```bash
-   npm install
+   npm install express
+   npm install mysql2
+   npm install dotenv
    ```
 
 2. Start the server:
