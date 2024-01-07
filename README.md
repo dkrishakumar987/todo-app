@@ -76,6 +76,6 @@ Before you begin, make sure you have MySQL Server installed on your machine.
 ## API Endpoints
 
 - `GET /tasks`: Retrieve all tasks in the format of {"completed" : [], "not_completed" : []}.
-- `POST /tasks`: Create a new task in the format of {"Id" : 20919, "Task" : "Test", "Created" : "2024-01-06"}.
-- `PUT /tasks`: Update a task by ID in the format of {"Id" : 20919, "Completed" : 1}.
+- `POST /tasks`: Create a new task in the format of {"id" : 20919, "task" : "Test", "created" : "2024-01-06"}.
+- `PUT /tasks`: Update a task by ID in the format of {"id" : 20919, "completed" : 1}.
 - `DELETE /tasks/:id`: Delete a task by ID.
