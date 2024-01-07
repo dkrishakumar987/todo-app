@@ -36,7 +36,7 @@ Before you begin, make sure you have MySQL Server installed on your machine.
 
    Replace `path/to/dbsetup.sql` with the actual path to the `dbsetup.sql` file.
 
-### .env Configuration
+### .env Environment Variables Configuration
 
 1. Create a new file named `.env` in the root of the project.
 
