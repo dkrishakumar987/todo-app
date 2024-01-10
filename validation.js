@@ -1,7 +1,8 @@
+//Importing express-validator module
 const { validationResult, body } = require("express-validator");
 
 //Validation Chain Middleware for Creating a Task
-let CreateTaskValid = [
+const CreateTaskValid = [
     //Validators
     body("id").exists().withMessage("'id' field required"),
     body("id").isInt().withMessage("'id' must be an integer"),
@@ -25,7 +26,7 @@ let CreateTaskValid = [
 ];
 
 //Validation Chain Middleware for Updating a Task
-let UpdateTaskValid = [
+const UpdateTaskValid = [
     //Validators
     body("id").exists().withMessage("'id' field required"),
     body("id").isInt().withMessage("'id' must be an integer"),
