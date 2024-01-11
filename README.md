@@ -56,7 +56,7 @@ Before you begin, make sure you have MySQL Server installed on your machine.
 1. Install dependencies:
 
     ```bash
-    npm install express mysql2 dotenv express-validator ejs
+    npm install express mysql2 dotenv express-validator ejs helmet
     ```
 
 2. Start the server:
