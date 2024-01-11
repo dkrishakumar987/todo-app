@@ -1,9 +1,16 @@
 //Importing Express and database.js
 const express = require("express");
 const db = require("./database");
+const helmet = require("helmet");
 
 const app = express();
 const port = 8080;
+
+//Middleware for Security using Helmet
+app.use(helmet());
+
+//Middleware for Input Validation
+const { CreateTaskValid, UpdateTaskValid } = require("./validation");
 
 //Middleware to parse JSON requests
 app.use(express.json());
@@ -11,11 +18,16 @@ app.use(express.json());
 //Middleware to parse urlencoded requests
 app.use(express.urlencoded({ extended: true }));
 
-//Middleware for Input Validation
-const { CreateTaskValid, UpdateTaskValid } = require("./validation");
-
 //Setting View Engine to ejs
 app.set("view engine", "ejs");
+
+//Error Handler for Catch Blocks of the Routes
+const ErrorHandler = (error, text = "") => {
+    console.error(error);
+    res.status(500).json({
+        error: "Internal Server Error" + text,
+    });
+};
 
 //Route for CREATE Operation
 app.post("/tasks", CreateTaskValid, async (req, res) => {
@@ -24,10 +36,7 @@ app.post("/tasks", CreateTaskValid, async (req, res) => {
         await db.createTask(id, task, created);
         res.json({ message: "Task Created Succesfully" });
     } catch (error) {
-        console.error(error);
-        res.status(500).json({
-            error: "Internal Server Error - Unable to Add Task",
-        });
+        ErrorHandler(error, " - Unable to Create Task");
     }
 });
 
@@ -37,10 +46,7 @@ app.get("/tasks", async (req, res) => {
         const tasks = await db.getAllTasks();
         res.json(tasks);
     } catch (error) {
-        console.error(error);
-        res.status(500).json({
-            error: "Internal Server Error - Unable to Fetch Tasks",
-        });
+        ErrorHandler(error, " - Unable to Read Tasks");
     }
 });
 
@@ -52,10 +58,7 @@ app.get("/todo", async (req, res) => {
         const noncomptasks = tasks.not_completed;
         res.render("todo", { comptasks, noncomptasks });
     } catch (error) {
-        console.error(error);
-        res.status(500).json({
-            error: "Internal Server Error - Unable to Render View",
-        });
+        ErrorHandler(error, " - Unable to Render View");
     }
 });
 
@@ -66,10 +69,7 @@ app.put("/tasks", UpdateTaskValid, async (req, res) => {
         await db.updateTask(id, completed);
         res.json({ message: "Updated Task Successfully" });
     } catch (error) {
-        console.error(error);
-        res.status(500).json({
-            error: "Internal Server Error - Unable to Update Tasks",
-        });
+        ErrorHandler(error, " - Unable to Update Task");
     }
 });
 
@@ -80,10 +80,7 @@ app.delete("/tasks/:id", async (req, res) => {
         await db.deleteTask(taskId);
         res.json({ message: "Deleted Task Successfully" });
     } catch (error) {
-        console.error(error);
-        res.status(500).json({
-            error: "Internal Server Error - Unable to Delete Task",
-        });
+        ErrorHandler(error, " - Unable to Delete Task");
     }
 });
 

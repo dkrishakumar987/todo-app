@@ -1,6 +1,14 @@
 //Importing express-validator module
 const { validationResult, body } = require("express-validator");
 
+const ErrorHandler = async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+    next();
+};
+
 //Validation Chain Middleware for Creating a Task
 const CreateTaskValid = [
     //Validators
@@ -15,14 +23,7 @@ const CreateTaskValid = [
         .withMessage("'created' must be a date"),
     //Sanitizer
     body("task").trim().escape(),
-
-    (req, res, next) => {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
-        }
-        next();
-    },
+    ErrorHandler,
 ];
 
 //Validation Chain Middleware for Updating a Task
@@ -34,14 +35,7 @@ const UpdateTaskValid = [
     body("completed")
         .isIn([0, 1])
         .withMessage("'completed' must be a boolean(0 or 1)"),
-
-    (req, res, next) => {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
-        }
-        next();
-    },
+    ErrorHandler,
 ];
 
 module.exports = {
